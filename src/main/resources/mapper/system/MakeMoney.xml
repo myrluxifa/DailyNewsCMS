@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.MakeMoneyMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.MakeMoney">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="declare" jdbcType="VARCHAR" property="declare" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="cash" jdbcType="VARCHAR" property="cash" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="line_one" jdbcType="VARCHAR" property="lineOne" />
+    <result column="line_two" jdbcType="VARCHAR" property="lineTwo"/>
+    <result column="line_three" jdbcType="VARCHAR" property="lineThree"/>
+    <result column="line_four" jdbcType="VARCHAR" property="lineFour"/>
+    <result column="participants_num" jdbcType="INTEGER" property="participantsNum"/>
+ 	<result column="cycle" jdbcType="INTEGER" property="cycle"/>	
+ 	<result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+ 	<result column="imgs" jdbcType="VARCHAR" property="imgs"/>
+ 	<result column="flag" jdbcType="INTEGER" property="flag"/>
+ 	<result column="rewards_type" jdbcType="VARCHAR" property="rewardsType"/>
+ 	<result column="time_limit" jdbcType="INTEGER" property="timeLimit"/>
+  </resultMap>
+  
+  
+ 
+</mapper>

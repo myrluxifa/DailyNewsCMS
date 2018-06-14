@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.NewsInfoMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.NewsInfo">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="idata_id" jdbcType="VARCHAR" property="idataId" />
+    <result column="poster_screen_name" jdbcType="VARCHAR" property="posterScreenName" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="poster_id" jdbcType="VARCHAR" property="posterId" />
+    <result column="view_count" jdbcType="INTEGER" property="viewCount" />
+    <result column="content" jdbcType="VARCHAR" property="content"/>
+    <result column="imgs_url" jdbcType="VARCHAR" property="imgsUrl"/>
+    <result column="cat_id" jdbcType="VARCHAR" property="catId"/>
+    <result column="flag" jdbcType="INTEGER" property="flag"/>
+  </resultMap>
+  
+  
+ <select id="findNewsInfo" resultType="newsInfo" parameterType="newsInfo">
+  		select 
+  			id,
+  			publish_date publishDate,
+  			idata_id idataId,
+  			poster_screen_name posterScreenName,
+  			url,
+  			title,
+  			poster_id posterId,
+  			view_count viewCount,
+  			content content,
+  			imgs_url imgsUrl,
+  			cat_id catId,
+  			flag,
+  			(select cat_value from t_sys_news_type where cat_id=t.cat_id) catValue
+  		from t_news_info t
+  		where 1=1
+  		<if test="catId != null and catId != ''">
+        	AND cat_id = #{catId}
+	    </if>
+  		order by publish_date desc
+  </select>
+</mapper>
