@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="t_make_money")
@@ -47,6 +48,9 @@ public class MakeMoney {
 	private int flag;
 	
 	private int timeLimit;
+	
+	@Transient
+	private String logoOld;
 	
 
 	public String getId() {
@@ -199,4 +203,14 @@ public class MakeMoney {
 	public void setTimeLimit(int timeLimit) {
 		this.timeLimit = timeLimit;
 	}
+
+	public String getLogoOld() {
+		return logoOld;
+	}
+
+	public void setLogoOld(String logoOld) {
+		this.logoOld = logoOld;
+	}
+	
+	
 }

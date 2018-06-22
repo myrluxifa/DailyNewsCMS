@@ -16,6 +16,8 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.ImgUtil;
+import cc.mrbird.system.domain.EasyMoney;
 import cc.mrbird.system.domain.MakeMoney;
 import cc.mrbird.system.service.MakeMoneyService;
 import tk.mybatis.mapper.entity.Example;
@@ -59,6 +61,22 @@ public class MakeMoneyController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseBo.error("删除任务失败，请联系网站管理员！");
+		}
+	}
+	
+	@Log("添加轻松赚钱任务")
+	@RequestMapping("makeMoney/add")
+	@RequiresPermissions("makeMoney:add")
+	@ResponseBody
+	public ResponseBo add(MakeMoney makeMoney) {
+		try {
+			String imgUrl=ImgUtil.decryptByBase64(makeMoney.getLogo());
+			makeMoney.setLogo(imgUrl);
+			makeMoneyService.save(makeMoney);
+			
+			return ResponseBo.ok("新增任务成功");
+		}catch(Exception e) {
+			return ResponseBo.error("新增任务失败");
 		}
 	}
 }
