@@ -13,6 +13,7 @@
                         <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                         <div class="dropdown-menu dropdown-menu-right">
                         <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#makeMoney-add" shiro:hasPermission="makeMoney:add">添加</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateMakeMoney()" shiro:hasPermission="easyMoney:edit">修改</a>
                             <a href="javascript:void(0)" class="dropdown-item" onclick="delete()" shiro:hasPermission="makeMoney:delete">删除</a>
                         </div>
                     </div>
@@ -40,3 +41,4 @@
     </div>
 </div>
 <script data-th-src="@{js/app/system/makeMoney/makeMoney.js}"></script>
+<script data-th-src="@{js/app/system/makeMoney/makeMoneyEdit.js}"></script>

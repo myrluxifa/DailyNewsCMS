@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -64,7 +66,7 @@ public class MakeMoneyController extends BaseController {
 		}
 	}
 	
-	@Log("添加轻松赚钱任务")
+	@Log("添加高额返利任务")
 	@RequestMapping("makeMoney/add")
 	@RequiresPermissions("makeMoney:add")
 	@ResponseBody
@@ -78,5 +80,45 @@ public class MakeMoneyController extends BaseController {
 		}catch(Exception e) {
 			return ResponseBo.error("新增任务失败");
 		}
+	}
+	
+	
+	@RequestMapping("makeMoney/getMakeMoney")
+	@RequiresPermissions("makeMoney:edit")
+	@ResponseBody
+	public ResponseBo getMakeMoney(String id) {
+		try 
+		{
+			MakeMoney makeMoney=makeMoneyService.selectByKey(id);
+			return ResponseBo.ok(makeMoney);
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseBo.error("获取信息失败");
+		}
+	}
+	
+	
+	@Log("修改轻松赚钱任务")
+	@RequestMapping("makeMoney/update")
+	@RequiresPermissions("makeMoney:edit")
+	@ResponseBody
+	public ResponseBo update(MakeMoney makeMoney) {
+		try {
+			if(StringUtil.isBlank(makeMoney.getLogoOld())) {
+				String imgUrl=ImgUtil.decryptByBase64(makeMoney.getLogo());
+				makeMoney.setLogo(imgUrl);
+			}
+			makeMoneyService.updateAll(makeMoney);
+			return ResponseBo.ok("修改任务成功");
+		}catch(Exception e) {
+			return ResponseBo.error("修改任务失败");
+		}
+	}
+	
+	@RequestMapping("makeMoney/uploadImg")
+	@ResponseBody
+	public String uploadFile(MultipartFile file) {
+		String url=ImgUtil.uploadOneFile(file);
+		return url;
 	}
 }

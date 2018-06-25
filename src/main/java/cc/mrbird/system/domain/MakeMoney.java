@@ -1,5 +1,6 @@
 package cc.mrbird.system.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -51,6 +52,11 @@ public class MakeMoney {
 	
 	@Transient
 	private String logoOld;
+	
+	@Transient
+	private String[] _imgs;
+	
+	
 	
 
 	public String getId() {
@@ -211,6 +217,16 @@ public class MakeMoney {
 	public void setLogoOld(String logoOld) {
 		this.logoOld = logoOld;
 	}
+
+	public String[] get_imgs() {
+		return _imgs;
+	}
+
+	public void set_imgs(String[] _imgs) {
+		this._imgs = _imgs;
+	}
+
+	
 	
 	
 }
