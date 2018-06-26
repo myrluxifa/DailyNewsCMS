@@ -3,6 +3,7 @@ package cc.mrbird.system.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.jsoup.helper.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +47,20 @@ public class MakeMoneyController extends BaseController {
 		Example example = new Example(MakeMoney.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andCondition("flag=",0);
+		if(StringUtils.isNotBlank(mk.getType())) {
+			criteria.andCondition("type=", mk.getType());
+		}
+		if(StringUtils.isNotBlank(mk.getTitle())) {
+			criteria.andLike("title", "%"+mk.getTitle().trim()+"%");
+		}
+		
 		List<MakeMoney> list = this.makeMoneyService.selectByExample(example);
 		PageInfo<MakeMoney> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
 	}
 	
 	
-	@Log("删除新闻")
+	@Log("删除任务")
 	@RequiresPermissions("makeMoney:delete")
 	@RequestMapping("makeMoney/delete")
 	@ResponseBody

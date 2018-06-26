@@ -1,0 +1,46 @@
+<div class="modal fade" id="goldSetting-edit" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="goldSetting-add-modal-title">修改参数</h3>
+            </div>
+            <div class="modal-body">
+                <form id="goldSetting-add-form">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               		说明:
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" readonly="readonly" name="explain" class="form-control">
+                                    <input type="text" hidden name="id" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	金币:
+					            </span>
+                                <div class="form-group">
+                               		<input type="text" name="gold" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="goldSetting-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/goldSetting/goldSettingEdit.js}"></script>

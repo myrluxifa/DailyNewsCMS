@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.AdvertInfoMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.AdvertInfo">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+ 	<result column="url" jdbcType="VARCHAR" property="url"/>
+ 	<result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+ 	<result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+ 	<result column="read_num" jdbcType="INTEGER" property="readNum"/>
+ 	<result column="flag" jdbcType="INTEGER" property="flag"/>
+  </resultMap>
+  
+  
+ 
+</mapper>

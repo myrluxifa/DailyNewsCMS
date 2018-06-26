@@ -49,16 +49,15 @@
 	        var validator = $makeMoneyAddForm.validate();
 	        var flag = validator.form();
 	        if (flag) {
+	        	var imgs='';
+            	$("input[name='_imgs']").each(function(j,item){
+            		if(imgs=='') imgs=item.value;
+            		else imgs=imgs+'$lvmq$'+item.value;
+            	})
+            	
+            	$("#imgs").val(imgs);
+            	
 	            if (name == "save") {
-	            	
-	            	var imgs='';
-	            	$("input[name='_imgs']").each(function(j,item){
-	            		if(imgs=='') imgs=item.value;
-	            		else imgs=imgs+'$lvmq$'+item.value;
-	            	})
-	            	
-	            	$("#imgs").val(imgs);
-	            	
 	                $.post(ctx + "makeMoney/add", $makeMoneyAddForm.serialize(), function(r) {
 	                    if (r.code == 0) {
 	                        closeModal();
@@ -86,6 +85,7 @@
 	});
 
 	function closeModal() {
+		$('.img-div').remove();
 		validator.resetForm();
 		$MB.closeAndRestModal("makeMoney-add");
 	}
@@ -117,7 +117,8 @@
 	            	required: true
 	            },
 	            lineFour:{
-	            	required: true
+	            	required: true,
+	            	number: true
 	            },
 	            participantsNum:{
 	            	required: true

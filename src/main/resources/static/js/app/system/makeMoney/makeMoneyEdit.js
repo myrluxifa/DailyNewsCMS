@@ -19,8 +19,8 @@ function updateMakeMoney() {
             $form.find("input[name='id']").val(makeMoney.id);
             $form.find("input[name='title']").val(makeMoney.title);
             $form.find("img[name='img_show']").attr("src",makeMoney.logo);
-            $form.find("input[name='img']").val(makeMoney.logo);
-            $form.find("input[name='imgOld']").val(makeMoney.logo);
+            $form.find("input[name='logo']").val(makeMoney.logo);
+            $form.find("input[name='logoOld']").val(makeMoney.logo);
             $form.find("input[name='url']").val(makeMoney.url);
             $form.find("input[name='exposition']").val(makeMoney.exposition);
             $form.find("input[name='cash']").val(makeMoney.cash);
@@ -33,7 +33,20 @@ function updateMakeMoney() {
             $form.find("input[name='timeLimit']").val(makeMoney.timeLimit);
             $form.find("input[name='introduce']").val(makeMoney.introduce);
             editor.txt.html(makeMoney.introduce);
+            
+            $('.img-div').remove();
+            
+            var is=makeMoney.imgs.split('$lvmq$');
+            for(var i=0;i<is.length;i++){
+            	$("#imgs_up").before('<div class="img-div" style="margin-top:10px;">'
+			       		+'<img style="width:250px;height:200px" src="'+is[i]+'" >'
+			       		+'<input type="hidden" name="_imgs" value="'+is[i]+'">'
+			       		+'<button  type="button"   class="btn btn-secondary remove-img">移除</button>'
+			       	+'</div>');
+            }
+            
             $("#makeMoney-add-button").attr("name", "update");
+            
         } else {
             $MB.n_danger(r.msg);
         }

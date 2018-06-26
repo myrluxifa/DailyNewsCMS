@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.GoldRewardsMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.GoldRewards">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+ 	<result column="explain" jdbcType="VARCHAR" property="explain"/>
+ 	<result column="gold" jdbcType="VARCHAR" property="gold"/>
+ 	<result column="money" jdbcType="VARCHAR" property="money"/>
+ 	<result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+ 	<result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+  </resultMap>
+  
+   <select id="findGoldRewards" resultType="GoldRewards" parameterType="GoldRewards">
+  		select 
+  			id,`type`,`explain`,gold,money,update_user updateUser,update_time updateTime
+  		from t_sys_gold_rewards t
+  		where 1=1
+  		<if test="money != null and money != ''">
+        	AND money = #{money}
+	    </if>
+	    <if test="gold != null and gold != ''">
+        	AND gold = #{gold}
+	    </if>
+	    and type<![CDATA[<>]]> '102'
+  </select>
+  
+  <select id="findById" resultType="GoldRewards" parameterType="GoldRewards">
+  		select 
+  			id,`type`,`explain`,gold,money,update_user updateUser,update_time updateTime
+  		from t_sys_gold_rewards t
+  		where id=#{id}
+  		
+  </select>
+  
+  <update id="updateGold"  parameterType="GoldRewards" >
+  	update t_sys_gold_rewards set gold = #{gold} where id=#{id}
+  </update>
+ 
+</mapper>
