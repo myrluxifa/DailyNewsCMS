@@ -77,7 +77,7 @@ function updatebalanceSetting() {
         return;
     }
     var balanceSettingId = selected[0].id;
-    $.post(ctx + "balanceSetting/getbalanceSetting", { "id": balanceSettingId }, function(r) {
+    $.post(ctx + "balanceSetting/getBalanceSetting", { "id": balanceSettingId }, function(r) {
         if (r.code == 0) {
             var $form = $('#balanceSetting-edit');
             $form.modal();
