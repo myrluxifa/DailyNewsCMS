@@ -11,6 +11,8 @@ public interface GoldRewardsMapper extends MyMapper<GoldRewards> {
 	List<GoldRewards> findGoldRewards(GoldRewards goldRewards);
 
 	int updateGold(GoldRewards goldRewards);
+	
+	int updateBalance(GoldRewards goldRewards);
 
 	GoldRewards findById(GoldRewards goldRewards);
 }

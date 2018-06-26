@@ -36,5 +36,9 @@
   <update id="updateGold"  parameterType="GoldRewards" >
   	update t_sys_gold_rewards set gold = #{gold} where id=#{id}
   </update>
+  
+   <update id="updateBalance"  parameterType="GoldRewards" >
+  	update t_sys_gold_rewards set money = #{money} where id=#{id}
+  </update>
  
 </mapper>

@@ -50,10 +50,30 @@ public class GoldRewardsController extends BaseController{
 		return getDataTable(pageInfo);
 	}
 	
-	@RequestMapping("goldSetting/getGoldSetting")
-	@RequiresPermissions("goldSetting:edit")
+	
+	@Log("现金设置")
+	@RequestMapping("balanceSetting")
+	@RequiresPermissions("balanceSetting:list")
+	public String balanceIndex() {
+		return "system/balanceSetting/balanceSetting";
+	}
+	
+	@RequestMapping("balanceSetting/list")
 	@ResponseBody
-	public ResponseBo getMakeMoney(String id) {
+	public Map<String, Object> balanceSettingList(QueryRequest request) {
+		
+		GoldRewards goldRewards=new GoldRewards();
+		goldRewards.setGold("0");
+		List<GoldRewards> list = this.goldRewardsService.findGoldRewards(goldRewards);
+		PageInfo<GoldRewards> pageInfo = new PageInfo<>(list);
+		return getDataTable(pageInfo);
+	}
+	
+	
+	@RequestMapping("balanceSetting/getBalanceSetting")
+	@RequiresPermissions("balanceSetting:edit")
+	@ResponseBody
+	public ResponseBo getBalanceRewards(String id) {
 		try 
 		{
 			GoldRewards g=new GoldRewards();
@@ -65,6 +85,40 @@ public class GoldRewardsController extends BaseController{
 			return ResponseBo.error("获取信息失败");
 		}
 	}
+	
+	
+	@Log("修改金币参数")
+	@RequestMapping("balanceSetting/update")
+	@RequiresPermissions("balanceSetting:edit")
+	@ResponseBody
+	public ResponseBo balanceUpdate(GoldRewards goldRewards) {
+		try {
+			
+			goldRewardsService.updateBalance(goldRewards);
+			return ResponseBo.ok("修改参数成功");
+		}catch(Exception e) {
+			return ResponseBo.error("修改参数失败");
+		}
+	}
+	
+	@RequestMapping("goldSetting/getGoldSetting")
+	@RequiresPermissions("goldSetting:edit")
+	@ResponseBody
+	public ResponseBo getGoldRewards(String id) {
+		try 
+		{
+			GoldRewards g=new GoldRewards();
+			g.setId(id);
+			GoldRewards goldRewards=goldRewardsService.findById(g);
+			return ResponseBo.ok(goldRewards);
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseBo.error("获取信息失败");
+		}
+	}
+	
+	
+	
 	
 	
 	@Log("修改金币参数")

@@ -29,4 +29,8 @@ public class GoldRewardsServiceImpl  extends BaseService<GoldRewards> implements
 	public int updateGold(GoldRewards goldRewards) {
 		return goldRewardsMapper.updateGold(goldRewards);
 	}
+	
+	public int updateBalance(GoldRewards goldRewards) {
+		return goldRewardsMapper.updateBalance(goldRewards);
+	}
 }

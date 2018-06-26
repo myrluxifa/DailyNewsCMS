@@ -13,5 +13,7 @@ public interface GoldRewardsService  extends IService<GoldRewards> {
     GoldRewards findById(GoldRewards goldRewards);
 	
     int updateGold(GoldRewards goldRewards);
+    
+    int updateBalance(GoldRewards goldRewards);
 
 }
