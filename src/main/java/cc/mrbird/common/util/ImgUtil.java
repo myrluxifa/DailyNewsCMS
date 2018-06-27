@@ -115,13 +115,13 @@ public class ImgUtil {
         if (!file.isEmpty()) {  
             try {
             	String[] fileNameStr=file.getOriginalFilename().split("\\.");
-            	String url=today()+"/"+getUUID();
+            	String url=today()+"/"+getUUID()+".jpg";
                 // 文件保存路径  
                 String filePath = URI+url;
                 if(CreateFile.createImageDir(filePath)) {
                 	// 转存文件
                     file.transferTo(new File(filePath));  
-                    return IP+URI+url;  
+                    return IP+url;  
                 }else {
                 	//转存失败
                 	return "-1";
