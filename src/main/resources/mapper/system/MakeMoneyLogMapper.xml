@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.MakeMoneyLogMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.MakeMoneyLog">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="make_money_id" jdbcType="VARCHAR" property="makeMoneyId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
+    <result column="end_time" jdbcType="DATE" property="endTime"/>
+    <result column="imgs" jdbcType="VARCHAR" property="imgs"></result>
+  </resultMap>
+  
+  
+  <select id="findAll" resultType="MakeMoneyLog"  parameterType="MakeMoneyLog" >
+  		select 
+  			id,
+  			(select user_name from t_user_login where id=user_id ) userName,
+  			user_id userId,
+  			make_money_id makeMoneyId,
+  			(select title from t_make_money where id=make_money_id) title,
+  			status,
+  			create_time createTime,
+  			update_time updateTime,
+  			update_user updateUser,
+  			end_time endTime,
+  			imgs
+  		from t_make_money_log t
+  		where 1=1		
+  			<if test="status != null and status != ''">
+		        AND status = #{status}
+		    </if>
+		    <if test="title != null and title != ''">
+		        AND make_money_id in (select id from t_make_money where title like '%${title}%')
+		    </if>
+  </select>
+  
+  
+  <select id="findById" resultType="MakeMoneyLog"  parameterType="MakeMoneyLog" >
+  		select 
+  			id,
+  			(select user_name from t_user_login where id=user_id ) userName,
+  			user_id userId,
+  			(select balance from t_user_login where id=user_id) balance,
+  			make_money_id makeMoneyId,
+  			(select title from t_make_money where id=make_money_id) title,
+  			CASE WHEN
+					end_time<![CDATA[<]]>NOW() AND STATUS NOT IN (3,4)
+				THEN 
+					6
+				ELSE
+					STATUS
+				END AS STATUS,
+  			create_time createTime,
+  			update_time updateTime,
+  			update_user updateUser,
+  			end_time endTime,
+  			imgs
+  		from t_make_money_log t
+  		where id=#{id}
+  			
+  </select>
+  
+ 
+</mapper>

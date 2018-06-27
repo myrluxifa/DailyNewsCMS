@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.BalanceLogMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.BalanceLog">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+ 	<result column="type" jdbcType="VARCHAR" property="type"/>
+ 	<result column="num" jdbcType="VARCHAR" property="num"/>
+ 	<result column="old_num" jdbcType="VARCHAR" property="oldNum"/>
+ 	<result column="new_num" jdbcType="VARCHAR" property="newNum"/>
+ 	<result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+ 	<result column="create_time" jdbcType="TIMESTAMP" property="createTime"></result>
+  	<result column="remark" jdbcType="VARCHAR" property="remark"/>
+  	<result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+  	<result column="trigger_user_id" jdbcType="VARCHAR" property="triggerUserId"/>
+  </resultMap>
+  
+  
+ 
+</mapper>

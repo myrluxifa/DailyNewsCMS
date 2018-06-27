@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.UserLoginMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.UserLogin">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
+    <result column="gold" jdbcType="INTEGER" property="gold" />
+    <result column="invite_code" jdbcType="VARCHAR" property="inviteCode" />
+    <result column="my_invite_code" jdbcType="VARCHAR" property="myInviteCode" />
+    <result column="invite_count" jdbcType="INTEGER" property="inviteCount" />
+    <result column="balance" jdbcType="VARCHAR" property="balance" />
+    <result column="earnings" jdbcType="INTEGER" property="earnings" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="first_invite" jdbcType="VARCHAR" property="firstInvite" />
+    <result column="master_master" jdbcType="VARCHAR" property="masterMaster" />
+    <result column="newer_mission" jdbcType="VARCHAR" property="newerMission" />
+    <result column="grand_cnt" jdbcType="INTEGER" property="grandCnt" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  
+  
+</mapper>

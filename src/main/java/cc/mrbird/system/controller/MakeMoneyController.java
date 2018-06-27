@@ -1,5 +1,6 @@
 package cc.mrbird.system.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +20,17 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.ImgUtil;
+import cc.mrbird.system.domain.BalanceLog;
 import cc.mrbird.system.domain.EasyMoney;
 import cc.mrbird.system.domain.MakeMoney;
+import cc.mrbird.system.domain.MakeMoneyLog;
+import cc.mrbird.system.domain.UserLogin;
+import cc.mrbird.system.service.BalanceLogService;
+import cc.mrbird.system.service.MakeMoneyLogService;
 import cc.mrbird.system.service.MakeMoneyService;
+import cc.mrbird.system.service.UserLoginService;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
@@ -31,6 +39,15 @@ public class MakeMoneyController extends BaseController {
 
 	@Autowired
 	private MakeMoneyService makeMoneyService;
+	
+	@Autowired
+	private MakeMoneyLogService makeMoneyLogService;
+	
+	@Autowired
+	private BalanceLogService balanceLogService;
+	
+	@Autowired
+	private UserLoginService userLoginSerivce;
 	
 	
 	@Log("赚钱列表页")
@@ -129,4 +146,76 @@ public class MakeMoneyController extends BaseController {
 		String url=ImgUtil.uploadOneFile(file);
 		return url;
 	}
+	
+	
+	
+	@Log("赚钱报名列表页")
+	@RequestMapping("makeMoneyLog")
+	@RequiresPermissions("makeMoneyLog:list")
+	public String makeMoneyLogIndex() {
+		return "system/makeMoneyLog/makeMoneyLog";
+	}
+	
+	@RequestMapping("makeMoneyLog/list")
+	@ResponseBody
+	public Map<String, Object> makeMoneyLogList(QueryRequest request, MakeMoneyLog mk) {
+		PageHelper.startPage(request.getPageNum(), request.getPageSize());
+		
+		
+		List<MakeMoneyLog> list = this.makeMoneyLogService.findAll(mk);
+		PageInfo<MakeMoneyLog> pageInfo = new PageInfo<>(list);
+		return getDataTable(pageInfo);
+	}
+	
+	
+	
+	@RequestMapping("makeMoneyLog/getMakeMoneyLog")
+	@RequiresPermissions("makeMoneyLog:check")
+	@ResponseBody
+	public ResponseBo getMakeMoneyLog(String id) {
+		try 
+		{
+			MakeMoneyLog ml=new MakeMoneyLog();
+			ml.setId(id);
+			MakeMoneyLog makeMoneyLog=makeMoneyLogService.findById(ml);
+			return ResponseBo.ok(makeMoneyLog);
+		}catch (Exception e) {
+			// TODO: handle exception
+			return ResponseBo.error("获取信息失败");
+		}
+	}
+	
+	
+	@Log("修改轻松赚钱任务")
+	@RequestMapping("makeMoneyLog/update")
+	@RequiresPermissions("makeMoneyLog:check")
+	@ResponseBody
+	public ResponseBo updateMakeMoneyLog(MakeMoneyLog makeMoneyLog) {
+		try {
+			MakeMoneyLog m=makeMoneyLogService.findById(makeMoneyLog);
+			m.setStatus(makeMoneyLog.getStatus());
+			makeMoneyLogService.updateAll(m);
+			if(m.getStatus()==3) {
+				MakeMoney mk=makeMoneyService.selectByKey(m.getMakeMoneyId());
+				
+				UserLogin us=userLoginSerivce.selectByKey(m.getUserId());
+				
+				us.setBalance(String.valueOf(Double.valueOf(m.getBalance())+Double.valueOf(mk.getCash())));
+				userLoginSerivce.updateAll(us);
+				
+				BalanceLog balanceLog=new BalanceLog();
+				balanceLog.setCreateTime(new Date());
+				balanceLog.setNum(mk.getCash());
+				balanceLog.setType(Constant.MAKE_MONEY_REWARDS);
+				balanceLog.setOldNum(m.getBalance());
+				balanceLog.setNewNum(String.valueOf(Double.valueOf(m.getBalance())+Double.valueOf(mk.getCash())));
+				balanceLog.setUserId(m.getUserId());
+				balanceLogService.save(balanceLog);
+			}
+			return ResponseBo.ok("审批成功");
+		}catch(Exception e) {
+			return ResponseBo.error("审批失败");
+		}
+	}
+	
 }
