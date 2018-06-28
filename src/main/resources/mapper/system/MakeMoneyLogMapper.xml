@@ -22,7 +22,13 @@
   			user_id userId,
   			make_money_id makeMoneyId,
   			(select title from t_make_money where id=make_money_id) title,
-  			status,
+  			CASE WHEN
+					end_time<![CDATA[<]]>NOW() AND STATUS NOT IN (3,4)
+				THEN 
+					6
+				ELSE
+					STATUS
+				END AS STATUS,
   			create_time createTime,
   			update_time updateTime,
   			update_user updateUser,
@@ -30,8 +36,14 @@
   			imgs
   		from t_make_money_log t
   		where 1=1		
-  			<if test="status != null and status != ''">
+  			<if test="_status != 6 and _status !=7">
 		        AND status = #{status}
+		    </if>
+		    <if test="_status == 7">
+		        AND status = #{status} AND end_time <![CDATA[>]]> now()
+		    </if>
+		    <if test="_status==6  ">
+		        AND status not in ('3','4') AND end_time <![CDATA[<]]> now()
 		    </if>
 		    <if test="title != null and title != ''">
 		        AND make_money_id in (select id from t_make_money where title like '%${title}%')

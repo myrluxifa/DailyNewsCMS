@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.InvteImgBannerMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.InviteImgBanner">
+   <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="sort" jdbcType="INTEGER" property="sort"/>
+  </resultMap>
+  
+  
+ 
+</mapper>

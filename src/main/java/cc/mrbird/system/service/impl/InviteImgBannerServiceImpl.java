@@ -8,29 +8,30 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cc.mrbird.common.service.impl.BaseService;
-import cc.mrbird.system.dao.AdvertInfoMapper;
-import cc.mrbird.system.dao.EasyMoneyMapper;
+import cc.mrbird.system.dao.InviteImgBannerMapper;
 import cc.mrbird.system.domain.AdvertInfo;
 import cc.mrbird.system.domain.EasyMoney;
-import cc.mrbird.system.service.AdvertInfoService;
+import cc.mrbird.system.domain.InviteImgBanner;
+import cc.mrbird.system.service.InviteImgBannerService;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
-@Service("advertInfoService")
-public class AdvertInfoServiceImpl extends BaseService<AdvertInfo> implements AdvertInfoService {
+@Service("InviteImgBannerService")
+public class InviteImgBannerServiceImpl extends BaseService<InviteImgBanner> implements InviteImgBannerService {
+
 	@Autowired
-	private AdvertInfoMapper advertInfoMapper;
+	private InviteImgBannerMapper inviteImgBannerMapper;
 	
 	@Override
 	@Transactional
-	public void deleteAdvertInfo(String ids) {
+	public void deleteInviteImgBanner(String ids) {
 		List<String> list = Arrays.asList(ids.split(","));
-		Example example=new Example(AdvertInfo.class);
+		Example example=new Example(InviteImgBanner.class);
 		Criteria criteria = example.createCriteria(); 
 		criteria.andIn("id", list);
-		AdvertInfo advert=new AdvertInfo();
+		InviteImgBanner advert=new InviteImgBanner();
 		advert.setFlag(1);
 		
-		this.advertInfoMapper.updateByExample(advert, example);
+		this.inviteImgBannerMapper.updateByExample(advert, example);
 	}
 }

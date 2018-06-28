@@ -1,0 +1,59 @@
+<div class="modal fade" id="inviteImgBanner-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="inviteImgBanner-add-modal-title">新增banner</h3>
+            </div>
+            <div class="modal-body">
+                <form id="inviteImgBanner-add-form">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               		url:
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="url" class="form-control">
+                                    <input type="text" hidden name="id" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-11 imgs-div">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 图片:
+					            </span>
+                                <div class="form-group">
+                                	
+                                	<input type="file" id="imgs_up" class="form-control">
+                                	<img src="" id="add-img" style="width:250px;height:200px">
+                                	<input type="hidden" name="imgUrl" value="">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               		顺序:
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="sort" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="inviteImgBanner-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/inviteImgBanner/inviteImgBannerAdd.js}"></script>

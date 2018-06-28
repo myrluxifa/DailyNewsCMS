@@ -161,7 +161,26 @@ public class MakeMoneyController extends BaseController {
 	public Map<String, Object> makeMoneyLogList(QueryRequest request, MakeMoneyLog mk) {
 		PageHelper.startPage(request.getPageNum(), request.getPageSize());
 		
-		
+		switch (mk.getStatus()) {
+		case 1:
+			mk.set_status(7);
+			break;
+		case 2:
+			mk.set_status(7);
+			break;
+		case 3:
+			mk.set_status(3);
+			break;
+		case 4:
+			mk.set_status(4);
+			break;
+		case 5:
+			mk.set_status(6);
+			break;
+		case 6:
+			mk.set_status(6);
+			break;
+		}
 		List<MakeMoneyLog> list = this.makeMoneyLogService.findAll(mk);
 		PageInfo<MakeMoneyLog> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);

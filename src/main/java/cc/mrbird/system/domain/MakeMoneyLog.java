@@ -39,6 +39,9 @@ public class MakeMoneyLog {
 	
 	@Transient
 	private String balance;
+	
+	@Transient
+	private int _status;
 
 	public String getId() {
 		return id;
@@ -135,6 +138,15 @@ public class MakeMoneyLog {
 	public void setBalance(String balance) {
 		this.balance = balance;
 	}
+
+	public int get_status() {
+		return _status;
+	}
+
+	public void set_status(int _status) {
+		this._status = _status;
+	}
+
 	
 	
 }
