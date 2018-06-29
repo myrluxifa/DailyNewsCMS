@@ -30,6 +30,7 @@ $(document).ready(function() {
         }, 200);
     });
 
+    $("input[name=username]")[0].focus();
 });
 
 
