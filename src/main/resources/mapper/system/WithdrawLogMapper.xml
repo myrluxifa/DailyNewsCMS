@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.WithdrawMapper">
+ <select id="findWithdrawLog" resultType="WithdrawLog" parameterType="WithdrawLog">
+  		select 
+  		id,
+  		user_id userId,
+  		(select a.USERNAME from t_user a where a.USER_ID = t.user_id) userName,
+  		fee,
+  		state,
+  		captcha,
+  		create_time createTime,
+  		(select a.USERNAME from t_user a where a.USER_ID = t.auditing_user) auditingUser,
+  		auditing_time auditingTime,
+  		remark 
+  		from t_withdraw_log t
+  		<where>
+  			<if test="state != null and state != ''">
+  				and state = #{state}
+  			</if>
+  		</where>
+  		order by create_time desc
+  </select>
+  
+  <update id="updateState">
+  	update t_withdraw_log
+  	set state = #{state}, auditing_time = now(), auditing_user = #{auditingUser}
+  	where id in 
+  	<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+  		#{item}
+  	</foreach>
+  </update>
+</mapper>
