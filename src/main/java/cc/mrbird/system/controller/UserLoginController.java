@@ -42,7 +42,9 @@ public class UserLoginController extends BaseController {
 		Example example = new Example(UserLogin.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andCondition("flag=",0);
-		
+		if(StringUtils.isNotBlank(ul.getUserName())) {
+			criteria.andLike("userName","%" +ul.getUserName()+"%");
+		}
 		List<UserLogin> list = this.userLoginService.selectByExample(example);
 		PageInfo<UserLogin> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
