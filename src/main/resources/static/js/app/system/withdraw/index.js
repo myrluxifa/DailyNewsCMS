@@ -47,7 +47,7 @@ $(function() {
             	title: '审批时间'
             },
             {
-            	field: 'title',
+            	field: 'remark',
             	title: '备注'
             }
             
