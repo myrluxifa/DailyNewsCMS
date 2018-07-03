@@ -10,5 +10,7 @@ import cc.mrbird.system.domain.WithdrawLog;
 public interface WithdrawMapper extends MyMapper<WithdrawLog> {
 	List<WithdrawLog> findWithdrawLog(WithdrawLog withdraw);
 
-	int updateState(@Param("ids")List<String> list, @Param("state")String state, @Param("auditingUser")String auditingUser);
+	int updateState(@Param("ids")List<String> list, @Param("state")String state, @Param("auditingUser")String auditingUser, @Param("remark") String remark);
+	
+	WithdrawLog findById(@Param("id") String id);
 }

@@ -6,9 +6,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.net.ssl.SSLContext;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -39,10 +41,7 @@ import cc.mrbird.common.util.BeanTools;
 import cc.mrbird.system.controller.bean.PayToUser;
 import cc.mrbird.system.controller.bean.PayToUserRes;
 import cc.mrbird.system.dao.WithdrawMapper;
-import cc.mrbird.system.domain.NewsInfo;
 import cc.mrbird.system.domain.WithdrawLog;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Controller
 public class WithdrawController extends BaseController {
@@ -99,25 +98,40 @@ public class WithdrawController extends BaseController {
 	@RequiresPermissions("withdraw:pass")
 	@RequestMapping("withdraw/pass")
 	@ResponseBody
-	public ResponseBo pass(String ids) {
+	public synchronized ResponseBo pass(String ids) {
 		try {
-			HttpPost post = new HttpPost("https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers");
-	        PayToUser req = new PayToUser("wx70fd7691b93c23d6", "1508334291", null, String.valueOf(RandomUtils.nextInt(99999999)), 
-	        		String.valueOf(RandomUtils.nextInt(99999999)), "ovH2H07PxiTYlviqXjXW5zawo80E", "NO_CHECK", null, "0.01", "提现", "47.104.73.127");
-	        req.setSign(weixinSign(req));
-	        log.info(new Gson().toJson(req));
-	        post.setEntity(new StringEntity(BeanTools.toXml(req), "UTF-8"));
-	        CloseableHttpResponse response = httpClient.execute(post);
-	        
-	        HttpEntity entity = response.getEntity();
-	        
-	        PayToUserRes res = new PayToUserRes();
-	        String xml = EntityUtils.toString(entity, "utf8");
-	        log.info(xml);
-	        res = PayToUserRes.fromXml(xml);
 			
-			List<String> list = Arrays.asList(ids.split(","));
-			withdrawMapper.updateState(list, "1", String.valueOf(getCurrentUser().getUserId()));
+			for (String id : ids.split(",")) {
+				
+				WithdrawLog wlog = withdrawMapper.findById(id);
+				
+				if(!wlog.getState().equals("0")) {
+					return ResponseBo.ok("不能重复审核");
+				}
+				
+				HttpPost post = new HttpPost("https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers");
+		        PayToUser req = new PayToUser("wx70fd7691b93c23d6", "1508334291", null, String.valueOf(RandomUtils.nextInt(99999999)), 
+		        		String.valueOf(RandomUtils.nextInt(99999999)), wlog.getOpenid(), "NO_CHECK", null, String.valueOf(Integer.valueOf(wlog.getFee()) * 100), "提现", "47.104.73.127");
+		        req.setSign(weixinSign(req));
+		        log.info(new Gson().toJson(req));
+		        post.setEntity(new StringEntity(BeanTools.toXml(req), "UTF-8"));
+		        CloseableHttpResponse response = httpClient.execute(post);
+		        
+		        HttpEntity entity = response.getEntity();
+		        
+		        PayToUserRes res = new PayToUserRes();
+		        String xml = EntityUtils.toString(entity, "utf8");
+		        log.info(xml);
+		        res = PayToUserRes.fromXml(xml);
+				
+		        if(StringUtils.isBlank(res.getErr_code_des())) {
+		        	withdrawMapper.updateState(Arrays.asList(id), "1", String.valueOf(getCurrentUser().getUserId()), null);		        	
+		        } else {
+		        	withdrawMapper.updateState(Arrays.asList(id), "0", String.valueOf(getCurrentUser().getUserId()), res.getErr_code_des());       	
+		        }
+		        
+			}
+			
 			return ResponseBo.ok("操作成功！");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,7 +146,7 @@ public class WithdrawController extends BaseController {
 	public ResponseBo reject(String ids) {
 		try {
 			List<String> list = Arrays.asList(ids.split(","));
-			withdrawMapper.updateState(list, "2", String.valueOf(getCurrentUser().getUserId()));
+			withdrawMapper.updateState(list, "2", String.valueOf(getCurrentUser().getUserId()), null);
 			return ResponseBo.ok("操作成功！");
 		} catch (Exception e) {
 			e.printStackTrace();

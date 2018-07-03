@@ -22,10 +22,26 @@
   		order by create_time desc
   </select>
   
+  <select id="findById" resultType="WithdrawLog" parameterType="String">
+  		select 
+  		id,
+  		user_id userId,
+  		fee,
+  		state,
+  		captcha,
+  		create_time createTime,
+  		auditing_time auditingTime,
+  		auditing_user auditingUser,
+  		remark 
+  		from t_withdraw_log t
+  		where id = #{id}
+  		order by create_time desc
+  </select>
+  
   <update id="updateState">
   	update t_withdraw_log
-  	set state = #{state}, auditing_time = now(), auditing_user = #{auditingUser}
-  	where id in 
+  	set state = #{state}, auditing_time = now(), auditing_user = #{auditingUser}, remark = #{remark}
+  	where state != #{state} and id in 
   	<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
   		#{item}
   	</foreach>

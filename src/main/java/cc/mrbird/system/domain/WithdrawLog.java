@@ -23,6 +23,7 @@ public class WithdrawLog implements Serializable {
 
 	@Transient
 	private String userName;
+	private String openid;
 	private String userId;
 	private String fee;
 	private String state;
@@ -31,6 +32,20 @@ public class WithdrawLog implements Serializable {
 	private String auditingUser;
 	private Date auditingTime;
 	private String remark;
+
+	/**
+	 * @return the openid
+	 */
+	public String getOpenid() {
+		return openid;
+	}
+
+	/**
+	 * @param openid the openid to set
+	 */
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
 
 	/**
 	 * @return the userName
