@@ -45,6 +45,10 @@ $(function() {
             {
             	field: 'auditingTime',
             	title: '审批时间'
+            },
+            {
+            	field: 'title',
+            	title: '备注'
             }
             
 
