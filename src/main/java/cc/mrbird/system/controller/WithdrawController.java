@@ -124,6 +124,9 @@ public class WithdrawController extends BaseController {
 		        log.info(xml);
 		        res = PayToUserRes.fromXml(xml);
 				
+		        log.info(res.getErr_code_des());
+		        log.info(String.valueOf(StringUtils.isBlank(res.getErr_code_des())));
+		        
 		        if(StringUtils.isBlank(res.getErr_code_des())) {
 		        	withdrawMapper.updateState(Arrays.asList(id), "1", String.valueOf(getCurrentUser().getUserId()), null);		        	
 		        } else {
