@@ -49,7 +49,7 @@
   	<if test="state == '2'">
   		and state != '1' 
   	</if>
-  	<if test="state != '0'">
+  	<if test="state ne '0'">
   	    and state != #{state}   	
   	</if>
   </update>
