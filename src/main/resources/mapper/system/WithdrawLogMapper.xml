@@ -25,6 +25,7 @@
   <select id="findById" resultType="WithdrawLog" parameterType="String">
   		select 
   		id,
+  		openid, 
   		user_id userId,
   		fee,
   		state,
