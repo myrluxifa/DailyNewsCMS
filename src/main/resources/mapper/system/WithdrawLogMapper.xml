@@ -49,6 +49,8 @@
   	<if test="state == '2'">
   		and state != '1' 
   	</if>
-  	and state != #{state}
+  	<if test="state != '0'">
+  	    and state != #{state}   	
+  	</if>
   </update>
 </mapper>
