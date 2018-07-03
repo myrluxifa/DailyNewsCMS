@@ -7,12 +7,16 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.pagehelper.PageInfo;
 
 import cc.mrbird.system.domain.User;
 
 public class BaseController {
+	
+	protected Logger log = LoggerFactory.getLogger(getClass());
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
 		Map<String, Object> rspData = new HashMap<>();
