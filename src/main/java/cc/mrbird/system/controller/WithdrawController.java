@@ -111,7 +111,7 @@ public class WithdrawController extends BaseController {
 				
 				HttpPost post = new HttpPost("https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers");
 		        PayToUser req = new PayToUser("wx70fd7691b93c23d6", "1508334291", null, String.valueOf(RandomUtils.nextInt(99999999)), 
-		        		String.valueOf(RandomUtils.nextInt(99999999)), wlog.getOpenid(), "NO_CHECK", null, String.valueOf(Integer.valueOf(wlog.getFee()) * 100), "提现", "47.104.73.127");
+		        		String.valueOf(RandomUtils.nextInt(99999999)), wlog.getOpenid(), "NO_CHECK", null, String.valueOf(Math.round(Double.valueOf(wlog.getFee()) * 100)), "提现", "47.104.73.127");
 		        req.setSign(weixinSign(req));
 		        log.info(new Gson().toJson(req));
 		        post.setEntity(new StringEntity(BeanTools.toXml(req), "UTF-8"));
