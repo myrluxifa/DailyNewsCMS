@@ -22,6 +22,7 @@ import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.ImgUtil;
+import cc.mrbird.common.util.Util;
 import cc.mrbird.system.domain.BalanceLog;
 import cc.mrbird.system.domain.EasyMoney;
 import cc.mrbird.system.domain.MakeMoney;
@@ -99,6 +100,8 @@ public class MakeMoneyController extends BaseController {
 		try {
 			String imgUrl=ImgUtil.decryptByBase64(makeMoney.getLogo());
 			makeMoney.setLogo(imgUrl);
+			makeMoney.setLineOne(Util.translate(makeMoney.getLineOne()));
+			makeMoney.setLineTwo(Util.translate(makeMoney.getLineTwo()));
 			makeMoneyService.save(makeMoney);
 			
 			return ResponseBo.ok("新增任务成功");
@@ -133,6 +136,8 @@ public class MakeMoneyController extends BaseController {
 				String imgUrl=ImgUtil.decryptByBase64(makeMoney.getLogo());
 				makeMoney.setLogo(imgUrl);
 			}
+			makeMoney.setLineOne(Util.translate(makeMoney.getLineOne()));
+			makeMoney.setLineTwo(Util.translate(makeMoney.getLineTwo()));
 			makeMoneyService.updateAll(makeMoney);
 			return ResponseBo.ok("修改任务成功");
 		}catch(Exception e) {

@@ -123,6 +123,9 @@
 	            participantsNum:{
 	            	required: true
 	            },
+	            rewardsType:{
+	            	required: true
+	            },
 	            cycle:{
 	            	required: true,
 	            	digits:true
@@ -164,6 +167,9 @@
 	            	required: icon+"此项不能为空"
 	            },
 	            lineFour:{
+	            	required: icon+"此项不能为空"
+	            },
+	            rewardsType:{
 	            	required: icon+"此项不能为空"
 	            },
 	            participantsNum:{

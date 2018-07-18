@@ -29,6 +29,7 @@ function updateMakeMoney() {
             $form.find("input[name='lineThree']").val(makeMoney.lineThree);
             $form.find("input[name='lineFour']").val(makeMoney.lineFour);
             $form.find("input[name='participantsNum']").val(makeMoney.participantsNum);
+            $form.find("input[name='rewardsType']").val(makeMoney.rewardsType);
             $form.find("input[name='cycle']").val(makeMoney.cycle);
             $form.find("input[name='timeLimit']").val(makeMoney.timeLimit);
             $form.find("input[name='introduce']").val(makeMoney.introduce);

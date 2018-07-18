@@ -8,6 +8,8 @@ public class Alert {
 	private String newsId;
 	
 	private String createTime;
+	
+	private String url;
 
 	public String getTitle() {
 		return title;
@@ -40,6 +42,14 @@ public class Alert {
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	

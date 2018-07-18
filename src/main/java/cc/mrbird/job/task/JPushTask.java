@@ -40,6 +40,7 @@ public class JPushTask {
     	alert.setBody(n.getContent().substring(0,20));
     	alert.setCreateTime(df.format(n.getPublishDate()));
     	alert.setTitle(n.getTitle());
+    	alert.setUrl(n.getUrl());
     	String jsonstr=new Gson().toJson(alert);
     	
     	JsonObject returnData = new JsonParser().parse(jsonstr).getAsJsonObject();

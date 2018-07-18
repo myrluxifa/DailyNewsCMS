@@ -25,7 +25,12 @@ $(function() {
             },
             {
             	field: 'type',
-            	title: '分类'
+            	title: '分类',
+            	formatter: function(value, row, index) {
+                    if (value == '0') return '其他APP';
+                    else if (value == '1') return '理财APP';
+                    else return '未知';
+                }
             }
             
 
