@@ -42,6 +42,10 @@ function search() {
     $MB.refreshTable('inviteImgBannerTable');
 }
 
+function refresh() {
+    $MB.refreshTable('inviteImgBannerTable');
+}
+
 function deleteinviteImgBanner() {
     var selected = $("#inviteImgBannerTable").bootstrapTable('getSelections');
     var selected_length = selected.length;

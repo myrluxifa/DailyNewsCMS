@@ -22,6 +22,7 @@ function updateEasyMoney() {
             $form.find("input[name='img']").val(easyMoney.img);
             $form.find("input[name='imgOld']").val(easyMoney.img);
             $form.find("input[name='textare']").val(easyMoney.textare);
+            editor.txt.html(easyMoney.textare);
             $("#easyMoney-add-button").attr("name", "update");
         } else {
             $MB.n_danger(r.msg);

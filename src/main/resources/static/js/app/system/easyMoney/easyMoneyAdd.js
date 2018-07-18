@@ -3,22 +3,23 @@
 	var $easyMoneyAddForm = $("#easyMoney-add-form");
 	
 	
+	var E = window.wangEditor;
+    var editor = new E('#editor');
+	var $text1 = $('#textare');
+    // 或者 var editor = new E( document.getElementById('editor') )
+	editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+	editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html);
+    }
+	editor.create();
+	E.fullscreen.init('#editor');
+	$text1.val(editor.txt.html());
+	
 	
 
 	$(function() {
 		
-		var E = window.wangEditor;
-        var editor = new E('#editor');
-		var $text1 = $('#textare');
-        // 或者 var editor = new E( document.getElementById('editor') )
-		editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-		editor.customConfig.onchange = function (html) {
-            // 监控变化，同步更新到 textarea
-            $text1.val(html);
-        }
-		editor.create();
-		E.fullscreen.init('#editor');
-		$text1.val(editor.txt.html());
         
 	    validateRule();
 	    
@@ -56,6 +57,7 @@
 	});
 
 	function closeModal() {
+		$('.img-div').remove();
 		validator.resetForm();
 		$MB.closeAndRestModal("easyMoney-add");
 	}
@@ -115,8 +117,8 @@
 		       base64Code=this.result;
 		        //把得到的base64赋值到img标签显示
 		       $("#img_show").attr("src",base64Code);
-		       $('#logo').val(base64Code);
-		       $('#logoOld').val('');
+		       $('#_img').val(base64Code);
+		       $('#imgOld').val('');
 		     }
 		
 		

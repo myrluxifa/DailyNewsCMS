@@ -1,20 +1,18 @@
 package cc.mrbird.system.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Table(name="t_easy_money")
-public class EasyMoney implements Serializable {
+public class EasyMoney {
 
 	
 	@Id
-	@GeneratedValue(generator = "UUID")
+	@GeneratedValue(generator = "JDBC")
 	private String id;
 	
 	private String title;

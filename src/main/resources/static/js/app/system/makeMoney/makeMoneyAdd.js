@@ -127,9 +127,7 @@
 	            	required: true,
 	            	digits:true
 	            },
-	            introduce:{
-	            	required: true
-	            },
+	            
 	            time_limit:{
 	            	required: true,
 	            	digits:true
@@ -175,9 +173,7 @@
 	            	required: icon+"此项不能为空",
 	            	digits:icon+"请输入整数"
 	            },
-	            introduce:{
-	            	required: icon+"此项不能为空"
-	            },
+	            
 	            time_limit:{
 	            	required: icon+"此项不能为空",
 	            	digits:icon+"请输入整数"

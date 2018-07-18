@@ -77,8 +77,10 @@ public class EasyMoneyController  extends BaseController {
 	@ResponseBody
 	public ResponseBo add(EasyMoney easyMoney) {
 		try {
+			String uuid=ImgUtil.getUUID();
 			String imgUrl=ImgUtil.decryptByBase64(easyMoney.getImg());
 			easyMoney.setImg(imgUrl);
+			easyMoney.setId(uuid);
 			easyMoneyService.save(easyMoney);
 			
 			return ResponseBo.ok("新增任务成功");

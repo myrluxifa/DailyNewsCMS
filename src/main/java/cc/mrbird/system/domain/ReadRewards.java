@@ -17,7 +17,7 @@ public class ReadRewards {
 	
 	private int horCnt;
 	
-	private int horMoney;
+	private String horMoney;
 
 	public String getId() {
 		return id;
@@ -67,13 +67,15 @@ public class ReadRewards {
 		this.horCnt = horCnt;
 	}
 
-	public int getHorMoney() {
+	public String getHorMoney() {
 		return horMoney;
 	}
 
-	public void setHorMoney(int horMoney) {
+	public void setHorMoney(String horMoney) {
 		this.horMoney = horMoney;
 	}
+
+	
 	
 	
 }

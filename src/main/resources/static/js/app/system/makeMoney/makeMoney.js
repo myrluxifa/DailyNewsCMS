@@ -40,6 +40,10 @@ function search() {
 }
 
 
+function refresh() {
+    $MB.refreshTable('makeMoneyTable');
+}
+
 function deleteMk() {
     var selected = $("#makeMoneyTable").bootstrapTable('getSelections');
     var selected_length = selected.length;

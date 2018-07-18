@@ -38,6 +38,10 @@ $(function() {
 });
 
 
+function refresh() {
+    $MB.refreshTable('easyMoneyTable');
+}
+
 function search() {
     $MB.refreshTable('easyMoneyTable');
 }
