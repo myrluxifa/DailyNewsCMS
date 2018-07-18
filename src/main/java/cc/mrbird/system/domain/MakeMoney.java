@@ -1,6 +1,8 @@
 package cc.mrbird.system.domain;
 
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -57,7 +59,7 @@ public class MakeMoney {
 	private String[] _imgs;
 	
 	
-	
+	private Date createTime;
 
 	public String getId() {
 		return id;
@@ -224,6 +226,14 @@ public class MakeMoney {
 
 	public void set_imgs(String[] _imgs) {
 		this._imgs = _imgs;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	

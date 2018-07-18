@@ -102,6 +102,7 @@ public class MakeMoneyController extends BaseController {
 			makeMoney.setLogo(imgUrl);
 			makeMoney.setLineOne(Util.translate(makeMoney.getLineOne()));
 			makeMoney.setLineTwo(Util.translate(makeMoney.getLineTwo()));
+			makeMoney.setCreateTime(new Date());
 			makeMoneyService.save(makeMoney);
 			
 			return ResponseBo.ok("新增任务成功");

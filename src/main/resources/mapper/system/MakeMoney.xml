@@ -20,6 +20,7 @@
  	<result column="flag" jdbcType="INTEGER" property="flag"/>
  	<result column="rewards_type" jdbcType="VARCHAR" property="rewardsType"/>
  	<result column="time_limit" jdbcType="INTEGER" property="timeLimit"/>
+ 	<result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
   </resultMap>
   
   
