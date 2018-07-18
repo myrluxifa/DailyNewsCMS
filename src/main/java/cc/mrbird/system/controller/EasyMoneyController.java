@@ -50,6 +50,7 @@ public class EasyMoneyController  extends BaseController {
 		if(StringUtils.isNotBlank(em.getTitle())) {
 			criteria.andLike("title", "%"+em.getTitle()+"%");
 		}
+		example.setOrderByClause("create_time desc");
 		List<EasyMoney> list = this.easyMoneyService.selectByExample(example);
 		PageInfo<EasyMoney> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);

@@ -54,6 +54,7 @@ public class AdvertController extends BaseController {
 		if(StringUtils.isNotBlank(ad.getTitle())) {
 			criteria.andLike("title", "%"+ad.getTitle()+"%");
 		}
+		example.setOrderByClause("create_time desc");
 		List<AdvertInfo> list = this.advertInfoService.selectByExample(example);
 		PageInfo<AdvertInfo> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);

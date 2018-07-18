@@ -45,6 +45,7 @@ public class UserLoginController extends BaseController {
 		if(StringUtils.isNotBlank(ul.getUserName())) {
 			criteria.andLike("userName","%" +ul.getUserName()+"%");
 		}
+		example.setOrderByClause("create_time desc");
 		List<UserLogin> list = this.userLoginService.selectByExample(example);
 		PageInfo<UserLogin> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);

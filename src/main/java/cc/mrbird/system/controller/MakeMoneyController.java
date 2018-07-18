@@ -71,7 +71,7 @@ public class MakeMoneyController extends BaseController {
 		if(StringUtils.isNotBlank(mk.getTitle())) {
 			criteria.andLike("title", "%"+mk.getTitle().trim()+"%");
 		}
-		
+		example.setOrderByClause("create_time desc");
 		List<MakeMoney> list = this.makeMoneyService.selectByExample(example);
 		PageInfo<MakeMoney> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
