@@ -63,7 +63,7 @@ public class NewsInfoServiceImpl extends BaseService<NewsInfo> implements NewsIn
 		NewsInfo newsInfo=new NewsInfo();
 		newsInfo.setFlag(1);
 		
-		this.newsInfoMapper.updateByExample(newsInfo, example);
+		this.newsInfoMapper.updateByExampleSelective(newsInfo, example);
 	}
 	
 	

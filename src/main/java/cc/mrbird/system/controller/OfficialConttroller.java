@@ -26,7 +26,7 @@ public class OfficialConttroller extends BaseController {
 	@Autowired
 	private OfficialService officialService;
 	
-	@Log("金币设置")
+	@Log("文案设置")
 	@RequestMapping("official")
 	@RequiresPermissions("official:list")
 	public String index() {

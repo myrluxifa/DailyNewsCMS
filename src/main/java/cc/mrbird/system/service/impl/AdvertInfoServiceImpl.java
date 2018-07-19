@@ -31,6 +31,6 @@ public class AdvertInfoServiceImpl extends BaseService<AdvertInfo> implements Ad
 		AdvertInfo advert=new AdvertInfo();
 		advert.setFlag(1);
 		
-		this.advertInfoMapper.updateByExample(advert, example);
+		this.advertInfoMapper.updateByExampleSelective(advert, example);
 	}
 }

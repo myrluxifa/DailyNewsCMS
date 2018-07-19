@@ -1,0 +1,55 @@
+<div class="card">
+	<div data-th-include="system/sysMessage/sysMessageEdit"></div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <div class="dataTables_buttons hidden-sm-down actions">
+                 	<span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
+                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
+                    <div class="dropdown actions__item">
+                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                        <div class="dropdown-menu dropdown-menu-right">
+                           	<a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#sysMessage-edit" shiro:hasPermission="sysMessage:add">添加</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="updatesysMessage()" shiro:hasPermission="sysMessage:edit">修改</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteSysMessage()" shiro:hasPermission="sysMessage:delete">删除</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="pushSysMessage()" shiro:hasPermission="sysMessage:push">发布</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="data-table_filter" class="dataTables_filter">
+                    <form class="sysMessage-table-form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	标题ࣺ
+					            </span>
+                                    <div class="form-group">
+                                        <input type="text" name="title" class="form-control">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	状态ࣺ
+					            </span>
+                                    <div class="form-group">
+                                    	<select class="form-control" name="flag">
+                                            <option value="1" selected>请选择</option>
+                                            <option value="0">待发布</option>
+                                            <option value="2">已发布</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table id="sysMessageTable" data-mobile-responsive="true" class="mb-bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/sysMessage/sysMessage.js}"></script>

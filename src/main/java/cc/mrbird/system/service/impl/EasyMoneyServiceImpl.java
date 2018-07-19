@@ -33,7 +33,7 @@ public class EasyMoneyServiceImpl extends BaseService<EasyMoney> implements Easy
 		EasyMoney easyMoney=new EasyMoney();
 		easyMoney.setFlag(1);
 		
-		this.easyMoneyMapper.updateByExample(easyMoney, example);
+		this.easyMoneyMapper.updateByExampleSelective(easyMoney, example);
 	}
 	
 }

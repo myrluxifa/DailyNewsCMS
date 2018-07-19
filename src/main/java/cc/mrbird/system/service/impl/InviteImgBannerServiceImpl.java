@@ -32,6 +32,6 @@ public class InviteImgBannerServiceImpl extends BaseService<InviteImgBanner> imp
 		InviteImgBanner advert=new InviteImgBanner();
 		advert.setFlag(1);
 		
-		this.inviteImgBannerMapper.updateByExample(advert, example);
+		this.inviteImgBannerMapper.updateByExampleSelective(advert, example);
 	}
 }

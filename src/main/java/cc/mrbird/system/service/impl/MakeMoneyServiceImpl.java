@@ -31,6 +31,6 @@ public class MakeMoneyServiceImpl extends BaseService<MakeMoney> implements Make
 		MakeMoney mk=new MakeMoney();
 		mk.setFlag(1);
 		
-		this.MakeMoneyMapper.updateByExample(mk, example);
+		this.MakeMoneyMapper.updateByExampleSelective(mk, example);
 	}
 }

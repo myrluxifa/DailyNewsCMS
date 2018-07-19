@@ -1,0 +1,48 @@
+<div class="modal fade" id="sysMessage-edit" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="sysMessage-add-modal-title">修改参数</h3>
+            </div>
+            <div class="modal-body">
+                <form id="sysMessage-add-form">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	标题:
+					            </span>
+                                <div class="form-group">
+                                    <input type="text"  name="title" class="form-control">
+                                    <input type="text" hidden name="id" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                         <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 消息:
+					            </span>
+                                <div class="form-group">
+                                	<div id="editor">
+								       	<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+								    </div>
+                                </div>
+                                
+                                <textarea id="detail" name="detail"  hidden="true"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="sysMessage-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/system/sysMessage/sysMessageEdit.js}"></script>
