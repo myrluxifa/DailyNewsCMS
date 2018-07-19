@@ -5,7 +5,7 @@
   		select 
   		id,
   		user_id userId,
-  		(select a.USERNAME from t_user a where a.USER_ID = t.user_id) userName,
+  		(select case when a.name is not null then a.name else a.user_name end from t_user_login a where a.id = t.user_id) userName,
   		fee,
   		state,
   		captcha,
