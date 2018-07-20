@@ -91,7 +91,7 @@ public class NewsInfoServiceImpl extends BaseService<NewsInfo> implements NewsIn
 	    	
 	    	JsonObject returnData = new JsonParser().parse(jsonstr).getAsJsonObject();
 	    
-			JpushClientUtil.sendToAll(returnData, new JsonObject());
+	    	JpushClientUtil.sendToAll(alert.getBody(), returnData);
 		}
 	}
 }

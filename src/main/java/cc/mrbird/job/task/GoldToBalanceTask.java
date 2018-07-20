@@ -83,8 +83,15 @@ public class GoldToBalanceTask {
     	
     	JsonObject returnData = new JsonParser().parse(jsonstr).getAsJsonObject();
     
-		JpushClientUtil.sendToAll(returnData, new JsonObject());
+    	JpushClientUtil.sendToAll(alert.getBody(), returnData);
 		
 	}
 	
+	
+	public static void main(String[] args) {
+		double bsum=Double.valueOf("26.01");
+		double gsum=(double)2100/Integer.valueOf("1000");
+		String balance=String.valueOf(NumberUtils.feeFormat(bsum+gsum));
+		System.out.println(balance);
+	}
 }

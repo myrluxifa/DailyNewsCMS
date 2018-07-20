@@ -37,10 +37,10 @@ public class JpushClientUtil {
      * @param extraJsonObject   额外增加字段
      * @return 0推送失败，1推送成功
      */
-    public static Result sendToAll(JsonObject alertJsonObject, JsonObject extraJsonObject) {
+    public static Result sendToAll(String detail, JsonObject extraJsonObject) {
         Result result = new Result();
         try {
-            PushPayload pushPayload= buildPushObject_android_and_ios(alertJsonObject, extraJsonObject);
+            PushPayload pushPayload= buildPushObject_android_and_ios(detail, extraJsonObject);
             System.out.println(pushPayload);
             PushResult pushResult=jPushClient.sendPush(pushPayload);
             System.out.println(pushResult);
@@ -56,7 +56,7 @@ public class JpushClientUtil {
     }
     
     
-    public static PushPayload buildPushObject_android_and_ios(JsonObject alertJsonObject, JsonObject extraJsonObject) {
+    public static PushPayload buildPushObject_android_and_ios(String detail, JsonObject extraJsonObject) {
     	  
         System.out.println("----------buildPushObject_android_and_ios_alertWithTitle");
         extraJsonObject.addProperty("customId",getCustomId());
@@ -65,16 +65,16 @@ public class JpushClientUtil {
                 .setPlatform(Platform.android_ios())
                 .setAudience(Audience.all())
                 .setNotification(Notification.newBuilder()
-                        .setAlert(alertJsonObject)
+                        .setAlert(detail)
                         .addPlatformNotification(AndroidNotification.newBuilder()
-                                .setAlert(alertJsonObject)
+                                .setAlert(detail)
                                 //此字段为透传字段，不会显示在通知栏。用户可以通过此字段来做一些定制需求，如特定的key传要指定跳转的页面（value）
                                 .addExtra("extra", extraJsonObject)
                                 .build()
                         )
                         .addPlatformNotification(IosNotification.newBuilder()
                                 //传一个IosAlert对象，指定apns body、title、subtitle等
-                                .setAlert(alertJsonObject)
+                                .setAlert(detail)
                                 //直接传alert
                                 //此项是指定此推送的badge自动加1
                                 .incrBadge(1)
@@ -93,7 +93,7 @@ public class JpushClientUtil {
                 // sdk默认不做任何处理，不会有通知提示。建议看文档http://docs.jpush.io/guideline/faq/的
                 // [通知与自定义消息有什么区别？]了解通知和自定义消息的区别
                 .setMessage(Message.newBuilder()
-                        .setMsgContent(alertJsonObject.toString())
+                        .setMsgContent(detail.toString())
                         .setTitle(extraJsonObject.toString())
                         .build())
  
