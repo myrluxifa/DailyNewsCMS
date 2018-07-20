@@ -75,7 +75,9 @@ public class GoldToBalanceTask {
 		Alert alert=new Alert();
 		alert.setType("2");
 		Official official=officialMapper.selectByPrimaryKey("6");
-		alert.setGoldToBalance(new GoldToBalance(official.getDetails(),df.format(new Date())));
+		//alert.setGoldToBalance(new GoldToBalance(official.getDetails(),df.format(new Date())));
+		alert.setBody(official.getDetails());
+		alert.setCreateTime(df.format(new Date()));
     	
     	String jsonstr=new Gson().toJson(alert);
     	

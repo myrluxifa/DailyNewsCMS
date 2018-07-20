@@ -4,9 +4,15 @@ public class Alert {
 	
 	private String type;
 	
-	private News news;
+	private String title;
 	
-	private GoldToBalance goldToBalance;
+	private String body;
+	
+	private String newsId;
+	
+	private String createTime;
+	
+	private String url;
 
 	public String getType() {
 		return type;
@@ -16,22 +22,46 @@ public class Alert {
 		this.type = type;
 	}
 
-	public News getNews() {
-		return news;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setNews(News news) {
-		this.news = news;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public GoldToBalance getGoldToBalance() {
-		return goldToBalance;
+	public String getBody() {
+		return body;
 	}
 
-	public void setGoldToBalance(GoldToBalance goldToBalance) {
-		this.goldToBalance = goldToBalance;
+	public void setBody(String body) {
+		this.body = body;
 	}
-	
+
+	public String getNewsId() {
+		return newsId;
+	}
+
+	public void setNewsId(String newsId) {
+		this.newsId = newsId;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	
 	
 	

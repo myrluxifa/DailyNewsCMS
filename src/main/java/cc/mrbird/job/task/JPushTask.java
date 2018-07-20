@@ -39,13 +39,13 @@ public class JPushTask {
 		
 		Alert alert=new Alert();
 		alert.setType("1");
-		News news=new News();
-		news.setNewsId(n.getId());
-		news.setBody(n.getContent().substring(0,20));
-		news.setCreateTime(df.format(n.getPublishDate()));
-		news.setTitle(n.getTitle());
-		news.setUrl(n.getUrl());
-		alert.setNews(news);
+		//News news=new News();
+		alert.setNewsId(n.getId());
+		alert.setBody(n.getContent().substring(0,20));
+		alert.setCreateTime(df.format(n.getPublishDate()));
+		alert.setTitle(n.getTitle());
+		alert.setUrl(n.getUrl());
+		//alert.setNews(news);
     	String jsonstr=new Gson().toJson(alert);
     	
     	JsonObject returnData = new JsonParser().parse(jsonstr).getAsJsonObject();
