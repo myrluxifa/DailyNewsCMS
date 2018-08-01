@@ -248,4 +248,6 @@ public class UserController extends BaseController {
 			return ResponseBo.error("更新头像失败，请联系网站管理员！");
 		}
 	}
+	
+	
 }

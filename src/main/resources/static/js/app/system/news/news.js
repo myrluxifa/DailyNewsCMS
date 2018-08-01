@@ -18,6 +18,11 @@ $(function() {
                 title: '标题'
             },
             {
+                field: 'url',
+                title: '地址'
+            },
+            
+            {
             	field: 'catValue',
             	title: '分类'
             },

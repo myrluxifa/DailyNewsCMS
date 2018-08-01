@@ -12,7 +12,25 @@
     var editor = new E('#editor');
 	var $text1 = $('#introduce');
     // 或者 var editor = new E( document.getElementById('editor') )
-	editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+	//editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+	editor.customConfig.customUploadImg = function (files, insert) {
+	    // files 是 input 中选中的文件列表
+	    // insert 是获取图片 url 后，插入到编辑器的方法
+
+	    // 上传代码返回结果之后，将图片插入到编辑器中
+		var fm = new FormData();
+		fm.append('file', files[0]);
+		$.ajax({
+			url:'makeMoney/uploadImg',
+			type:'POST',
+			data:fm,
+			contentType:false,
+			processData:false,
+			success: function(result){
+				insert(result);
+			}
+		});
+	}
 	editor.customConfig.onchange = function (html) {
         // 监控变化，同步更新到 textarea
         $text1.val(html);

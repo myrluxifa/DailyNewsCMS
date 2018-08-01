@@ -41,7 +41,8 @@ public class JPushTask {
 		alert.setType("1");
 		//News news=new News();
 		alert.setNewsId(n.getId());
-		alert.setBody(n.getContent().substring(0,20));
+		String content=n.getContent().replaceAll("\n", "").substring(0,20);
+		alert.setBody(content);
 		alert.setCreateTime(df.format(n.getPublishDate()));
 		alert.setTitle(n.getTitle());
 		alert.setUrl(n.getUrl());

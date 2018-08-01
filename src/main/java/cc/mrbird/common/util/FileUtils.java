@@ -37,6 +37,9 @@ public class FileUtils {
 		Matcher m = p.matcher(str);
 		return m.replaceAll("").trim();
 	}
+	
+	
+	
 
 	/**
 	 * 生成Excel文件
