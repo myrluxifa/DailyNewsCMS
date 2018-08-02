@@ -38,9 +38,12 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.BeanTools;
+import cc.mrbird.common.util.NumberUtils;
 import cc.mrbird.system.controller.bean.PayToUser;
 import cc.mrbird.system.controller.bean.PayToUserRes;
+import cc.mrbird.system.dao.UserLoginMapper;
 import cc.mrbird.system.dao.WithdrawMapper;
+import cc.mrbird.system.domain.UserLogin;
 import cc.mrbird.system.domain.WithdrawLog;
 
 @Controller
@@ -75,6 +78,9 @@ public class WithdrawController extends BaseController {
 	
 	@Autowired
 	private WithdrawMapper withdrawMapper;
+	
+	@Autowired
+	private UserLoginMapper userLoginMapper;
 	
 	@RequestMapping("withdraw")
 	@RequiresPermissions("withdraw:list")
@@ -149,7 +155,18 @@ public class WithdrawController extends BaseController {
 	public ResponseBo reject(String ids) {
 		try {
 			List<String> list = Arrays.asList(ids.split(","));
-			withdrawMapper.updateState(list, "2", String.valueOf(getCurrentUser().getUserId()), null);
+			
+			for (String id : list) {
+				WithdrawLog wl = withdrawMapper.findById(id);
+				if("0".equals(wl.getState())) {
+					//恢复余额
+					UserLogin ul = userLoginMapper.selectByPrimaryKey(wl.getUserId());
+					ul.setBalance(NumberUtils.format(Double.valueOf(ul.getBalance()) + Double.valueOf(wl.getFee())));
+					userLoginMapper.updateByPrimaryKeySelective(ul);
+					withdrawMapper.updateState(Arrays.asList(id.split(",")), "2", String.valueOf(getCurrentUser().getUserId()), null);
+				}
+			}
+			
 			return ResponseBo.ok("操作成功！");
 		} catch (Exception e) {
 			e.printStackTrace();
