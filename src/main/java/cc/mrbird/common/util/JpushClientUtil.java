@@ -37,10 +37,10 @@ public class JpushClientUtil {
      * @param extraJsonObject   额外增加字段
      * @return 0推送失败，1推送成功
      */
-    public static Result sendToAll(String detail, JsonObject extraJsonObject) {
+    public static Result sendToAll(String title, String detail, JsonObject extraJsonObject) {
         Result result = new Result();
         try {
-            PushPayload pushPayload= buildPushObject_android_and_ios(detail, extraJsonObject);
+            PushPayload pushPayload= buildPushObject_android_and_ios(title, detail, extraJsonObject);
             System.out.println(pushPayload);
             PushResult pushResult=jPushClient.sendPush(pushPayload);
             System.out.println(pushResult);
@@ -56,7 +56,7 @@ public class JpushClientUtil {
     }
     
     
-    public static PushPayload buildPushObject_android_and_ios(String detail, JsonObject extraJsonObject) {
+    public static PushPayload buildPushObject_android_and_ios(String title, String detail, JsonObject extraJsonObject) {
     	  
         System.out.println("----------buildPushObject_android_and_ios_alertWithTitle");
         extraJsonObject.addProperty("customId",getCustomId());
@@ -74,7 +74,7 @@ public class JpushClientUtil {
                         )
                         .addPlatformNotification(IosNotification.newBuilder()
                                 //传一个IosAlert对象，指定apns body、title、subtitle等
-                                .setAlert("{title: '"+detail+"'}")
+                                .setAlert(new JsonParser().parse("{title: '"+title+"', body: '"+detail+"'}"))
                                 //直接传alert
                                 //此项是指定此推送的badge自动加1
                                 .incrBadge(1)

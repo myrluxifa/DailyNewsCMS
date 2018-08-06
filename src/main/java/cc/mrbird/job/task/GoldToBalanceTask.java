@@ -83,7 +83,7 @@ public class GoldToBalanceTask {
     	
     	JsonObject returnData = new JsonParser().parse(jsonstr).getAsJsonObject();
     
-    	JpushClientUtil.sendToAll(alert.getBody(), returnData);
+    	JpushClientUtil.sendToAll(alert.getTitle(), alert.getBody(), returnData);
 		
 	}
 	
