@@ -113,9 +113,10 @@
 	    validator = $makeMoneyAddForm.validate({
 	        rules: {
 	            title: {
+	            	//不做限制
 	                required: true,
-	                minlength: 3,
-	                maxlength: 10,
+	                minlength: 1,
+	                maxlength: 20,
 	               
 	            },
 	            logo:{
