@@ -34,6 +34,7 @@ function updateMakeMoney() {
             $form.find("input[name='timeLimit']").val(makeMoney.timeLimit);
             $form.find("input[name='introduce']").val(makeMoney.introduce);
             editor.txt.html(makeMoney.introduce);
+            $('#introduce').val(makeMoney.introduce);
             
             $('.img-div').remove();
             
