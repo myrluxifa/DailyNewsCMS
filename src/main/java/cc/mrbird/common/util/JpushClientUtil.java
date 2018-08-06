@@ -67,6 +67,7 @@ public class JpushClientUtil {
                 .setNotification(Notification.newBuilder()
                         .setAlert(detail)
                         .addPlatformNotification(AndroidNotification.newBuilder()
+                                .setTitle(title)
                                 .setAlert(detail)
                                 //此字段为透传字段，不会显示在通知栏。用户可以通过此字段来做一些定制需求，如特定的key传要指定跳转的页面（value）
                                 .addExtra("extra", extraJsonObject)
