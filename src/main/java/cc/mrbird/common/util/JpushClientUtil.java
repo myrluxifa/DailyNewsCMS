@@ -74,7 +74,7 @@ public class JpushClientUtil {
                         )
                         .addPlatformNotification(IosNotification.newBuilder()
                                 //传一个IosAlert对象，指定apns body、title、subtitle等
-                                .setAlert(detail)
+                                .setAlert("{title: '"+detail+"'}")
                                 //直接传alert
                                 //此项是指定此推送的badge自动加1
                                 .incrBadge(1)
