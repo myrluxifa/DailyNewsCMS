@@ -89,9 +89,17 @@ public class GoldToBalanceTask {
 	
 	
 	public static void main(String[] args) {
-		double bsum=Double.valueOf("26.01");
-		double gsum=(double)2100/Integer.valueOf("1000");
-		String balance=String.valueOf(NumberUtils.feeFormat(bsum+gsum));
-		System.out.println(balance);
+		SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Alert alert=new Alert();
+		alert.setType("2");
+		//alert.setGoldToBalance(new GoldToBalance(official.getDetails(),df.format(new Date())));
+		alert.setBody("账户金币已为您兑换为现金，赶快去查看吧！每日阅读奖励，为您开启新的一天");
+		alert.setCreateTime(df.format(new Date()));
+    	
+    	String jsonstr=new Gson().toJson(alert);
+    	
+    	JsonObject returnData = new JsonParser().parse(jsonstr).getAsJsonObject();
+    
+    	JpushClientUtil.sendToAll("每日速报", alert.getBody(), returnData);
 	}
 }
