@@ -30,7 +30,7 @@ public class JPushTask {
 		System.out.println("开始执行新闻推送");
 		Example example=new Example(NewsInfo.class);
 		Criteria criteria = example.createCriteria();
-		example.setOrderByClause("publish_date");
+		example.setOrderByClause("publish_date desc");
 		
 		List<NewsInfo> newsInfoArray=newsInfoMapper.selectByExample(example);
 		NewsInfo n=newsInfoArray.get(0);
