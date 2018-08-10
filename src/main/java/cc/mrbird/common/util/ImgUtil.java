@@ -22,11 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ImgUtil {
 	
-	public static final String URI="/opt/apache-tomcat-9.0.5/webapps/img-uri/";
+	public static final String URI="/home/server/tomcat-news-8080/webapps/img-uri/";
 	
 	//public static final String URI="C:\\";
 	
-	public static final String IP="http://47.104.73.127:8080/img-uri/";
+	public static final String IP="http://mrsb.cqlianbei.com/img-uri/";
 	
 	public static String getUUID(){
         UUID uuid=UUID.randomUUID();
